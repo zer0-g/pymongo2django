@@ -2,7 +2,6 @@ import settings
 from pymongo import MongoClient
 from pymongo.database import DBRef
 
-
 def get_DBInstance():
 
     connStr = userStr = db = None
@@ -24,4 +23,20 @@ def get_DBInstance():
         db = conn[settings.name]
 
     return db
+
+
+class Document(object):
+    db = None
+    objects =None
+    name = 'test' #default value
+
+    def __init__(self):
+        self.db = get_DBInstance()
+        self.objects = self.db[self.db.name]
+
+    def setName(self,name):
+        self.name=name
+        self.objects = self.db[name]
+
     
+        

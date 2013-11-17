@@ -1,2 +1,2 @@
 import settings
-from backend import get_DBInstance
+from backend import get_DBInstance,Document

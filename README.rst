@@ -30,6 +30,9 @@ Add to the 'INSTALLED_APPS' section the pymongo2django app and append it to the 
 Update the pymongo2django/settings.py file found inside the pymongo2django directory.
 Update the variables in this file to use database.
 
+Example Accessing DB instance
+=============================
+
 For instance, to create a DB instance::
 
    >>> from pymongo2django import get_DBInstance
@@ -42,3 +45,44 @@ To find an item in a collection::
    >>> col = db.tester
    >>> for row in col.find():
    >>> 		print row
+
+
+Example Accessing a collection via Document model
+================================================
+
+For instance, to create a collection instance via Document model class::
+
+   >>> import pymongo2django
+   >>> from book.models import Author
+   >>> author  = Author()
+   >>> author.setName(author.name)
+   
+To find an item in a collection::
+
+   >>> import pymongo2django
+   >>> from book.models import Author
+   >>> author = Author()
+   >>> author.setName(author.name)
+   >>> for row in author.objects.find():
+   >>> 		print row
+
+
+Sample Views.py in Django app Books
+===================================
+
+from django.http import HttpResponse
+from books.models import Author
+# Create your views here.
+def myview(request):
+    author = Author()
+    author.setName(author.name)
+    return HttpResponse('%s' % author.objects.find_one() )
+
+
+Sample Models.py in Django app Books
+===================================
+
+from pymongo2django import Document
+
+class Author(Document):
+    name='products'
