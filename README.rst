@@ -67,22 +67,27 @@ To find an item in a collection::
    >>> 		print row
 
 
-Sample Views.py in Django app Books
-===================================
+Sample views file in Django app Books
+=====================================
+views.py::
 
-from django.http import HttpResponse
-from books.models import Author
-# Create your views here.
-def myview(request):
-    author = Author()
-    author.setName(author.name)
-    return HttpResponse('%s' % author.objects.find_one() )
+ from django.http import HttpResponse
+ from books.models import Author
+
+ def myview(request):
+     author = Author()
+     author.setName(author.name)
+     return HttpResponse('%s' % author.objects.find_one() )
 
 
-Sample Models.py in Django app Books
-===================================
+Sample models file in Django app Books
+====================================
+models.py::
 
-from pymongo2django import Document
+ from pymongo2django import Document
 
-class Author(Document):
-    name='products'
+ class Author(Document):
+      name='products'
+     
+     
+Note pymongo2django do not syncdb with Django DATABASE_SETTING in the settings.py
