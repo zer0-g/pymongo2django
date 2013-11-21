@@ -30,7 +30,8 @@ Add to the 'INSTALLED_APPS' section the pymongo2django app and append it to the 
  ***IMPORTANT NOTES::
  Update the pymongo2django/settings.py file found inside the pymongo2django directory.
  Update these variables in the pymongo2django/settings.py file to use database.Ensure 
- also that the MongoDB server is running or   otherwise use a MongoDB server from an online vender/host.
+ also that the MongoDB server is running or   otherwise use a MongoDB server from an 
+ online vender/host.
 
 Example Accessing a collection via Document model
 =================================================
@@ -54,7 +55,8 @@ To find an item in a collection::
 Example Accessing a collection via DocumentSet model (ReplicaSet Configuration)
 ===============================================================================
 
-For instance, to create MongoDB instance (using a Replica Set Configuration) to access a collection via DocumentSet model class::
+For instance, to create MongoDB instance (using a Replica Set Configuration) to access a 
+collection via DocumentSet model class::
 
    >>> import pymongo2django
    >>> from book.models import AuthorSet
@@ -119,4 +121,9 @@ books/models.py::
 
  ***IMPORTANT NOTES:: 
  pymongo2django do not syncdb with Django DATABASE_SETTING found in the Django Project settings.py file. Adding to this 
- pymongo2django\settings.py cannot use multiple configuration settings. So once a Document model object or DocumentSet object is  created the settings for the database name is locked into either object type created. For instance a Document Model object using a  database name 'Work' and you want to change that database name to something else the current Document model object is using. You  would have to change the pymongo2django\settings.py file to reflect the changes for the new database name and then re-instantiate   the object when done. The same applies when using the DocumentSet only where the current database setting being used is different   from the new database settings.
+ pymongo2django\settings.py cannot use multiple configuration settings. So once a Document model object or DocumentSet 
+ object is created the settings for the database name is locked into either object type created. For instance a Document 
+ Model object using a database name 'Work' and you want to change that database name to something else the current Document 
+ model object is using. You would have to change the pymongo2django\settings.py file to reflect the changes for the new 
+ database name and then re-instantiate the object when done. The same applies when using the DocumentSet only where the 
+ current database setting being used is different from the new database settings.
