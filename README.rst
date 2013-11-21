@@ -3,7 +3,7 @@ Installation
 
 To install pymongo2django::
 
-   copy pymongo2django to the django project directory storing the manage.py file
+   copy pymongo2django directory to the django project directory storing the manage.py file
 
 Software Requirement
 ====================
@@ -16,7 +16,7 @@ The follow software requirement to install pymongo2django app::
      locally on your machine otherwise you can access database from the 
      cloud through MongoDB servers online (http://www.mongolab.com/)
 
-Usage
+Setup
 =====
 To use pymongo2django with your Django project, just add these lines to your settings.py file::
 
@@ -27,30 +27,14 @@ Add to the 'INSTALLED_APPS' section the pymongo2django app and append it to the 
       'pymongo2django',
    )
 
-Update the pymongo2django/settings.py file found inside the pymongo2django directory.
-Update the variables in this file to use database.
-
-Example Accessing DB instance
-=============================
-
-For instance, to create a DB instance::
-
-   >>> from pymongo2django import get_DBInstance
-   >>> db = get_DBInstance()
-   
-To find an item in a collection::
-
-   >>> from pymongo2django import get_DBInstance
-   >>> db = get_DBInstance()
-   >>> col = db.tester
-   >>> for row in col.find():
-   >>> 		print row
-
+***IMPORTANT NOTE::
+ Update the pymongo2django/settings.py file found inside the pymongo2django directory.
+ Update these variables in the pymongo2django/settings.py file to use database.Ensure also that the MongoDB server is running or   otherwise use a MongoDB server from an online vender/host.
 
 Example Accessing a collection via Document model
-================================================
+=================================================
 
-For instance, to create a collection instance via Document model class::
+For instance, to create a MongoDB instance to a collection via Document model class::
 
    >>> import pymongo2django
    >>> from book.models import Author
@@ -66,10 +50,52 @@ To find an item in a collection::
    >>> for row in author.objects.find():
    >>> 		print row
 
+Example Accessing a collection via DocumentSet model (ReplicaSet Configuration)
+===============================================================================
 
-Sample views file in Django app Books
-=====================================
-views.py::
+For instance, to create MongoDB instance (using a Replica Set Configuration) to access a collection via DocumentSet model class::
+
+   >>> import pymongo2django
+   >>> from book.models import AuthorSet
+   >>> authorset  = AuthorSet()
+   >>> authorset.setName(authorset.name)
+   
+To find an item in a collection::
+
+   >>> import pymongo2django
+   >>> from book.models import AuthorSet
+   >>> authorset = AuthorSet()
+   >>> authorset.setName(authorset.name)
+   >>> for row in authorset.objects.find():
+   >>> 		print row
+
+
+Sample views file using DocumentSet Model in the Books app
+==========================================================
+books/views.py::
+
+ from django.http import HttpResponse
+ from books.models import AuthorSet
+
+ def myview(request):
+     authorset = AuthorSet()
+     authorset.setName(authorset.name)
+     return HttpResponse('%s' % authorset.objects.find_one() )
+
+
+Sample models file using DocumentSet Model in the Books app
+===========================================================
+books/models.py::
+
+ from pymongo2django import DocumentSet
+
+ class AuthorSet(DocumentSet):
+      name='products'     
+
+
+Sample views file using Document Model in the Books app
+=======================================================
+books/views.py::
 
  from django.http import HttpResponse
  from books.models import Author
@@ -80,14 +106,16 @@ views.py::
      return HttpResponse('%s' % author.objects.find_one() )
 
 
-Sample models file in Django app Books
-====================================
-models.py::
+Sample models file using Document Model in Books app
+====================================================
+books/models.py::
 
  from pymongo2django import Document
 
  class Author(Document):
       name='products'
-     
-     
-Note pymongo2django do not syncdb with Django DATABASE_SETTING in the settings.py
+
+
+***IMPORTANT Notes:: 
+ pymongo2django do not syncdb with Django DATABASE_SETTING found in the Django Project settings.py file. Adding to this 
+ pymongo2django\settings.py cannot use multiple configuration settings. So once a Document model object or DocumentSet object is  created the settings for the database name is locked into either object type created. For instance a Document Model object using a  database name 'Work' and you want to change that database name to something else the current Document model object is using. You  would have to change the pymongo2django\settings.py file to reflect the changes for the new database name and then re-instantiate   the object when done. The same applies when using the DocumentSet only where the current database setting being used is different   from the new database settings.

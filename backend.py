@@ -1,5 +1,5 @@
 import settings
-from pymongo import MongoClient
+from pymongo import MongoClient,MongoReplicaSetClient
 from pymongo.database import DBRef
 
 def get_DBInstance():
@@ -25,10 +25,22 @@ def get_DBInstance():
     return db
 
 
+def get_ReplicaDB():
+
+    db = None
+    
+    if settings.hosts !=[] and settings.replicaName:
+        hostStr = ','.join(settings.hosts)
+        conn = MongoReplicaSetClient(hostStr,replicaSet=settings.replicaName)
+        db = conn[settings.name]
+
+    return db
+
+
 class Document(object):
     db = None
     objects =None
-    name = 'test' #default value
+    name = 'test' #default value for collection name
 
     def __init__(self):
         self.db = get_DBInstance()
@@ -38,5 +50,17 @@ class Document(object):
         self.name=name
         self.objects = self.db[name]
 
-    
+
+class DocumentSet(object):
+    db = None
+    objects =None
+    name = 'test' #default value for collection name
+
+    def __init__(self):
+        self.db = get_ReplicaDB()
+        self.objects = self.db[self.db.name]
+
+    def setName(self,name):
+        self.name=name
+        self.objects = self.db[name]
         
