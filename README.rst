@@ -5,6 +5,12 @@ To install pymongo2django::
 
    copy pymongo2django directory to your Python path
 
+Features
+========
+pymongo2django api is similar to Django/SQLAlchemy. It does not offers rich feature set other api 
+like Mogo, MongoKit and others give.  
+
+
 Software Requirement
 ====================
 
@@ -21,10 +27,10 @@ Setup
 To use pymongo2django with your Python projects/code, just import this Python library into your code::
 
  ***IMPORTANT NOTES::
- pymongo2django api is similar to Django/SQLAlchemy. Update the pymongo2django/settings.py 
- file found inside the pymongo2django directory. Update these variables in the 
- pymongo2django/settings.py file to use database.Ensure also that the MongoDB server is 
- running or otherwise use a MongoDB server from an online vender/host.
+ Update the pymongo2django/settings.py file found inside the pymongo2django directory. 
+ Update these variables in the pymongo2django/settings.py file to use database.Ensure 
+ also that the MongoDB server is running or otherwise use a MongoDB server from an online 
+ vender/host.
 
 Example Accessing a collection via Document model
 =================================================
