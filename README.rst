@@ -3,7 +3,7 @@ Installation
 
 To install pymongo2django::
 
-   copy pymongo2django directory to the django project directory storing the manage.py file
+   copy pymongo2django directory to your Python path
 
 Software Requirement
 ====================
@@ -18,20 +18,13 @@ The follow software requirement to install pymongo2django app::
 
 Setup
 =====
-To use pymongo2django with your Django project, just add these lines to your settings.py file::
-
-Add to the 'INSTALLED_APPS' section the pymongo2django app and append it to the end of this section ::
-
-   INSTALLED_APPS = (
-      ...
-      'pymongo2django',
-   )
+To use pymongo2django with your Python projects/code, just import this Python library into your code::
 
  ***IMPORTANT NOTES::
- Update the pymongo2django/settings.py file found inside the pymongo2django directory.
- Update these variables in the pymongo2django/settings.py file to use database.Ensure 
- also that the MongoDB server is running or   otherwise use a MongoDB server from an 
- online vender/host.
+ pymongo2django api is similar to Django/SQLAlchemy. Update the pymongo2django/settings.py 
+ file found inside the pymongo2django directory. Update these variables in the 
+ pymongo2django/settings.py file to use database.Ensure also that the MongoDB server is 
+ running or otherwise use a MongoDB server from an online vender/host.
 
 Example Accessing a collection via Document model
 =================================================
@@ -73,21 +66,8 @@ To find an item in a collection::
    >>> 		print row
 
 
-Sample views file using DocumentSet Model in the Books app
-==========================================================
-books/views.py::
-
- from django.http import HttpResponse
- from books.models import AuthorSet
-
- def myview(request):
-     authorset = AuthorSet()
-     authorset.setName(authorset.name)
-     return HttpResponse('%s' % authorset.objects.find_one() )
-
-
-Sample models file using DocumentSet Model in the Books app
-===========================================================
+Sample models file using DocumentSet Model in the Books class
+=============================================================
 books/models.py::
 
  from pymongo2django import DocumentSet
@@ -96,21 +76,8 @@ books/models.py::
       name='products'     
 
 
-Sample views file using Document Model in the Books app
-=======================================================
-books/views.py::
-
- from django.http import HttpResponse
- from books.models import Author
-
- def myview(request):
-     author = Author()
-     author.setName(author.name)
-     return HttpResponse('%s' % author.objects.find_one() )
-
-
-Sample models file using Document Model in Books app
-====================================================
+Sample models file using Document Model in Books class
+======================================================
 books/models.py::
 
  from pymongo2django import Document
@@ -120,7 +87,6 @@ books/models.py::
 
 
  ***IMPORTANT NOTES:: 
- pymongo2django do not syncdb with Django DATABASE_SETTING found in the Django Project settings.py file. Adding to this 
  pymongo2django\settings.py cannot use multiple configuration settings. So once a Document model object or DocumentSet 
  object is created the settings for the database name is locked into either object type created. For instance a Document 
  Model object using a database name 'Work' and you want to change that database name to something else the current Document 
