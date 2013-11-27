@@ -35,20 +35,42 @@ To use pymongo2django with your Python projects/code, just import this Python li
  also that the MongoDB server is running or otherwise use a MongoDB server from an online 
  vender/host.
 
+
+Sample Python code using Documente Model class (Replicaset configuration)
+=========================================================================
+
+models.py::
+
+ from pymongo2django import DocumentSet
+
+ class AuthorSet(DocumentSet):
+      name='products'     
+
+
+Sample Python code using Document Model class
+=============================================
+models.py::
+
+ from pymongo2django import Document
+
+ class Author(Document):
+      name='products'
+
+
 Example Accessing a collection via Document model
 =================================================
 
 For instance, to create a MongoDB instance to a collection via Document model class::
 
    >>> import pymongo2django
-   >>> from book.models import Author
+   >>> from models import Author
    >>> author  = Author()
    >>> author.setName(author.name)
    
 To find an item in a collection::
 
    >>> import pymongo2django
-   >>> from book.models import Author
+   >>> from models import Author
    >>> author = Author()
    >>> author.setName(author.name)
    >>> for row in author.objects.find():
@@ -61,38 +83,18 @@ For instance, to create MongoDB instance (using a Replica Set Configuration) to 
 collection via DocumentSet model class::
 
    >>> import pymongo2django
-   >>> from book.models import AuthorSet
+   >>> from models import AuthorSet
    >>> authorset  = AuthorSet()
    >>> authorset.setName(authorset.name)
    
 To find an item in a collection::
 
    >>> import pymongo2django
-   >>> from book.models import AuthorSet
+   >>> from models import AuthorSet
    >>> authorset = AuthorSet()
    >>> authorset.setName(authorset.name)
    >>> for row in authorset.objects.find():
    >>> 		print row
-
-
-Sample models file using DocumentSet Model in the Books class
-=============================================================
-books/models.py::
-
- from pymongo2django import DocumentSet
-
- class AuthorSet(DocumentSet):
-      name='products'     
-
-
-Sample models file using Document Model in Books class
-======================================================
-books/models.py::
-
- from pymongo2django import Document
-
- class Author(Document):
-      name='products'
 
 
  ***IMPORTANT NOTES:: 
