@@ -7,8 +7,11 @@ To install pymongo2django::
 
 Features
 ========
-pymongo2django api is similar to Django/SQLAlchemy. It does not offers rich feature set other api 
-like Mogo, MongoKit and others give.  
+
+pymongo2django::
+
+  pymongo2django api is similar to Django/SQLAlchemy. It does not offers rich feature set other api 
+  like Mogo, MongoKit and others give.  
 
 
 Software Requirement
